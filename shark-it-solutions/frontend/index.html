@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shark IT Solutions — Predator-Class Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Nunito:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --accent: #0077cc;
+    --accent-dark: #005599;
+    --accent-light: #e0f0ff;
+    --red: #0077cc;
+    --red-dark: #005599;
+    --red-glow: rgba(0,119,204,0.12);
+    --black: #f0f7ff;
+    --dark: #e4f0fb;
+    --card: #ffffff;
+    --border: #bdd8f0;
+    --text: #0d2a45;
+    --muted: #4a7a9b;
+    --hero-bg: #0a1f3d;
+    --hero-text: #e8f4ff;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Nunito', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #d0e8f8; }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 70px;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 2px solid #bdd8f0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,100,200,0.08);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-fin {
+    width: 28px; height: 34px;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    background: var(--red);
+  }
+
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 800;
+    color: #0d2a45; letter-spacing: 1px;
+  }
+
+  .nav-brand span { color: var(--red); }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 13px; color: #4a7a9b;
+    text-decoration: none; letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 600;
+    color: var(--red); border: 1px solid var(--red);
+    padding: 9px 22px; letter-spacing: 2px;
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent); color: #fff;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 75% 50%, rgba(0,170,255,0.18) 0%, transparent 65%),
+      linear-gradient(135deg, #071828 0%, #0a2244 60%, #0d1a38 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,140,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,140,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 720px;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--red);
+    letter-spacing: 4px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 30px; height: 1px; background: var(--red);
+  }
+
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero-h1 .red { color: var(--red); }
+  .hero-h1 .outline {
+    -webkit-text-stroke: 1.5px #e8f4ff;
+    color: transparent;
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px; color: #8ab8d8;
+    font-weight: 300; max-width: 500px;
+    line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-actions {
+    margin-top: 44px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600;
+    color: #fff; background: var(--red);
+    padding: 15px 36px; letter-spacing: 2px;
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.25s; border: 1px solid var(--red);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover { background: #0077cc; transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 13px; color: var(--text);
+    padding: 15px 36px; letter-spacing: 2px;
+    text-decoration: none; text-transform: uppercase;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+  }
+
+  .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+  .hero-stats {
+    position: absolute; right: 60px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 40px;
+    z-index: 1;
+    animation: fadeLeft 0.8s 0.4s ease both;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 52px; font-weight: 900;
+    color: var(--red); line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .stat-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to left, var(--red), transparent);
+  }
+
+  /* ===== SCROLL TICKER ===== */
+  .ticker {
+    background: linear-gradient(90deg, #0055aa, #0099ee);
+    padding: 12px 0; overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; color: #fff;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 60px; }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--red);
+    letter-spacing: 4px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-tag::before {
+    content: '▸'; color: var(--red); opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 900; text-transform: uppercase;
+    line-height: 1.05; letter-spacing: 0px; color: #0d2a45;
+  }
+
+  .section-title .red { color: var(--red); }
+
+  /* ===== SERVICES ===== */
+  .services { background: #f0f7ff; }
+
+  .services-intro {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 60px; gap: 40px;
+  }
+
+  .services-desc {
+    max-width: 400px; color: #4a7a9b;
+    font-weight: 300; font-size: 15px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; background: transparent;
+  }
+
+  .service-card {
+    background: #ffffff;
+    padding: 40px 36px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+    cursor: default;
+    box-shadow: 0 2px 16px rgba(0,100,200,0.06);
+  }
+
+  .service-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--red);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: #f0f7ff; box-shadow: 0 8px 32px rgba(0,100,200,0.12); }
+
+  .service-icon {
+    font-size: 32px; margin-bottom: 20px;
+    display: block;
+  }
+
+  .service-num {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--red);
+    letter-spacing: 2px; margin-bottom: 14px;
+  }
+
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 12px; color: #0d2a45;
+  }
+
+  .service-desc {
+    font-size: 14px; color: #4a7a9b;
+    line-height: 1.7; font-weight: 300;
+  }
+
+  .service-tags {
+    margin-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px; color: var(--red);
+    border: 1px solid rgba(255,34,34,0.3);
+    padding: 3px 10px; letter-spacing: 1px;
+  }
+
+  /* ===== WHY US ===== */
+  .why { background: #e4f0fb; }
+
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; margin-top: 60px;
+  }
+
+  .why-visual {
+    position: relative; height: 420px;
+  }
+
+  .why-box {
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid #bdd8f0;
+    padding: 28px 30px;
+    box-shadow: 0 4px 20px rgba(0,100,200,0.08);
+  }
+
+  .why-box-main {
+    top: 0; left: 0; right: 80px; bottom: 80px;
+  }
+
+  .why-box-accent {
+    bottom: 0; right: 0;
+    width: 240px; height: 200px;
+    background: linear-gradient(135deg, #0077cc, #00aaff);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+  }
+
+  .why-box-accent .big-num {
+    font-family: var(--font-display);
+    font-size: 72px; font-weight: 900;
+    line-height: 1; color: #fff;
+  }
+
+  .why-box-accent .big-label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 2px;
+    color: rgba(255,255,255,0.7); text-transform: uppercase;
+  }
+
+  .why-shark-title {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 900;
+    text-transform: uppercase; margin-bottom: 16px; color: #0d2a45;
+  }
+
+  .why-shark-text {
+    font-size: 14px; color: #4a7a9b;
+    line-height: 1.8; font-weight: 300;
+  }
+
+  .why-points {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  .why-point {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .why-point-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: #e0f0ff;
+    border: 1px solid #bdd8f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; border-radius: 8px;
+  }
+
+  .why-point-title {
+    font-family: var(--font-display);
+    font-size: 17px; font-weight: 700;
+    text-transform: uppercase; margin-bottom: 4px; color: #0d2a45;
+  }
+
+  .why-point-desc {
+    font-size: 13px; color: #4a7a9b; font-weight: 300;
+  }
+
+  /* ===== PROCESS ===== */
+  .process { background: #f0f7ff; }
+
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 60px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 36px; left: 12%; right: 12%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), var(--red), transparent);
+    z-index: 0;
+  }
+
+  .process-step {
+    padding: 0 20px; text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .step-circle {
+    width: 72px; height: 72px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    background: #e0f0ff;
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 900; color: var(--accent);
+  }
+
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 700;
+    text-transform: uppercase; margin-bottom: 10px; color: #0d2a45;
+  }
+
+  .step-desc {
+    font-size: 13px; color: #4a7a9b;
+    line-height: 1.6; font-weight: 300;
+  }
+
+  /* ===== TECHNOLOGIES ===== */
+  .tech { background: #e4f0fb; }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px; background: transparent;
+    margin-top: 60px;
+  }
+
+  .tech-item {
+    background: var(--card);
+    padding: 30px 20px; text-align: center;
+    transition: background 0.2s;
+  }
+
+  .tech-item:hover { background: #161616; }
+
+  .tech-logo {
+    font-size: 28px; display: block; margin-bottom: 10px;
+  }
+
+  .tech-name {
+    font-family: var(--font-mono);
+    font-size: 11px; color: #4a7a9b;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { background: var(--dark); }
+
+  .test-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border); margin-top: 60px;
+  }
+
+  .test-card {
+    background: var(--card); padding: 36px 32px;
+  }
+
+  .test-quote {
+    font-size: 32px; color: var(--red);
+    font-family: var(--font-display); line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .test-text {
+    font-size: 14px; color: #ccc;
+    line-height: 1.8; font-weight: 300;
+    font-style: italic; margin-bottom: 24px;
+  }
+
+  .test-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .test-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 16px; font-weight: 700; color: #fff;
+  }
+
+  .test-name {
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .test-role {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--muted); letter-spacing: 1px;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact { background: #e4f0fb; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; margin-top: 60px; align-items: start;
+  }
+
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: #e0f0ff; border: 1px solid #bdd8f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; border-radius: 10px;
+  }
+
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: 10px; color: var(--accent);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+  }
+
+  .contact-val {
+    font-size: 15px; color: #0d2a45; font-weight: 300;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-field {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .form-field label {
+    font-family: var(--font-mono);
+    font-size: 10px; color: #4a7a9b;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: #f0f7ff; border: 1px solid #bdd8f0;
+    color: #0d2a45; padding: 12px 16px;
+    font-family: var(--font-body); font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+    width: 100%; resize: vertical;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--red);
+  }
+
+  .form-field select option { background: var(--card); }
+
+  .form-submit {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600;
+    color: #fff; background: var(--red);
+    padding: 16px 40px; letter-spacing: 2px;
+    text-transform: uppercase; border: none;
+    cursor: pointer; transition: background 0.2s;
+    align-self: flex-start;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .form-submit:hover { background: #0077cc; }
+
+  /* ===== CLIENT LOGOS STRIP ===== */
+  .clients { background: #ffffff; padding: 50px 60px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .clients-label {
+    font-family: var(--font-mono); font-size: 11px;
+    color: #4a7a9b; letter-spacing: 4px;
+    text-transform: uppercase; text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .clients-track-wrap { overflow: hidden; position: relative; }
+
+  .clients-track-wrap::before,
+  .clients-track-wrap::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
+  }
+  .clients-track-wrap::before { left: 0; background: linear-gradient(to right, #ffffff, transparent); }
+  .clients-track-wrap::after  { right: 0; background: linear-gradient(to left,  #ffffff, transparent); }
+
+  .clients-track {
+    display: flex; gap: 0; width: max-content;
+    animation: slideLogos 28s linear infinite;
+  }
+
+  .clients-track:hover { animation-play-state: paused; }
+
+  @keyframes slideLogos {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .client-logo-box {
+    padding: 18px 44px; border-right: 1px solid #bdd8f0;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 6px; min-width: 180px;
+    transition: background 0.2s; cursor: default;
+  }
+
+  .client-logo-box:hover { background: #e0f0ff; }
+
+  .client-logo-icon { font-size: 22px; }
+
+  .client-logo-name {
+    font-family: var(--font-display); font-size: 15px;
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: #4a7a9b;
+    transition: color 0.2s; white-space: nowrap;
+  }
+
+  .client-logo-box:hover .client-logo-name { color: #0d2a45; }
+
+  .client-logo-industry {
+    font-family: var(--font-mono); font-size: 9px;
+    color: #8ab0cc; letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ===== ENHANCED REVIEWS ===== */
+  .reviews { background: #f0f7ff; }
+
+  .reviews-summary {
+    display: flex; align-items: center; gap: 60px;
+    margin-top: 50px; padding: 40px;
+    background: #ffffff; border: 1px solid #bdd8f0;
+    margin-bottom: 40px; flex-wrap: wrap;
+    box-shadow: 0 4px 20px rgba(0,100,200,0.08); border-radius: 12px;
+  }
+
+  .reviews-score { text-align: center; }
+
+  .reviews-big-num {
+    font-family: var(--font-display); font-size: 80px;
+    font-weight: 900; line-height: 1; color: var(--red);
+  }
+
+  .reviews-stars-row { display: flex; gap: 4px; justify-content: center; margin: 6px 0; }
+
+  .star { color: #00aaff; font-size: 20px; }
+  .star-empty { color: #0f2040; font-size: 20px; }
+
+  .reviews-total {
+    font-family: var(--font-mono); font-size: 11px;
+    color: #4a7a9b; letter-spacing: 2px;
+  }
+
+  .reviews-bars { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 10px; }
+
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+
+  .bar-label {
+    font-family: var(--font-mono); font-size: 11px;
+    color: #4a7a9b; width: 36px; letter-spacing: 1px;
+  }
+
+  .bar-track {
+    flex: 1; height: 6px; background: #bdd8f0; border-radius: 3px; overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%; background: var(--red); border-radius: 3px;
+    transition: width 1s ease;
+  }
+
+  .bar-count {
+    font-family: var(--font-mono); font-size: 10px;
+    color: #4a7a9b; width: 20px; text-align: right;
+  }
+
+  .reviews-platforms {
+    display: flex; flex-direction: column; gap: 16px; min-width: 180px;
+  }
+
+  .platform-badge {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; border: 1px solid #bdd8f0;
+    background: #f0f7ff; border-radius: 8px;
+  }
+
+  .platform-icon { font-size: 18px; }
+
+  .platform-name {
+    font-family: var(--font-mono); font-size: 11px;
+    color: #4a7a9b; letter-spacing: 1px;
+  }
+
+  .platform-score {
+    font-family: var(--font-display); font-size: 18px;
+    font-weight: 700; color: var(--text); margin-left: auto;
+  }
+
+  /* Review Cards Grid */
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; background: transparent;
+  }
+
+  .review-card {
+    background: #ffffff; padding: 32px 28px;
+    transition: all 0.2s; position: relative;
+    box-shadow: 0 2px 16px rgba(0,100,200,0.06);
+  }
+
+  .review-card:hover { background: #f0f7ff; box-shadow: 0 8px 28px rgba(0,100,200,0.12); }
+
+  .review-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 16px;
+  }
+
+  .review-author-row { display: flex; align-items: center; gap: 12px; }
+
+  .review-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 16px;
+    font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+
+  .av-red    { background: #0077cc; }
+  .av-blue   { background: #0055aa; }
+  .av-green  { background: #006688; }
+  .av-purple { background: #0088bb; }
+  .av-amber  { background: #0099cc; }
+  .av-teal   { background: #00aabb; }
+
+  .review-name {
+    font-family: var(--font-display); font-size: 15px;
+    font-weight: 700; text-transform: uppercase;
+  }
+
+  .review-role {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 1px; margin-top: 2px;
+  }
+
+  .review-stars { display: flex; gap: 2px; }
+  .review-stars .star { font-size: 14px; color: #00aaff; }
+
+  .review-service-tag {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--red); border: 1px solid rgba(255,34,34,0.3);
+    padding: 2px 8px; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px; display: inline-block;
+  }
+
+  .review-text {
+    font-size: 13px; color: #3a6080;
+    line-height: 1.8; font-weight: 300;
+    font-style: italic; margin-bottom: 16px;
+  }
+
+  .review-company {
+    font-family: var(--font-mono); font-size: 10px;
+    color: #8ab0cc; letter-spacing: 1px; text-transform: uppercase;
+    border-top: 1px solid #bdd8f0; padding-top: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .review-verified {
+    font-family: var(--font-mono); font-size: 9px;
+    color: #00aaff; letter-spacing: 1px;
+  }
+
+  /* ===== MOBILE additions ===== */
+  @media (max-width: 900px) {
+    .clients { padding: 40px 0; }
+    .reviews-summary { flex-direction: column; gap: 32px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== TEAM & WORKING STRUCTURE ===== */
+  .team-section { background: #e4f0fb; padding: 100px 60px; }
+
+  .team-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center; margin-top: 60px;
+  }
+
+  .team-images {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 240px 180px;
+    gap: 16px;
+  }
+
+  .team-img {
+    border-radius: 12px; overflow: hidden;
+    position: relative;
+  }
+
+  .team-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .team-img:hover img { transform: scale(1.05); }
+
+  .team-img.span-col { grid-column: span 2; }
+
+  .team-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,50,120,0.5) 0%, transparent 60%);
+    border-radius: 12px;
+  }
+
+  .team-img-label {
+    position: absolute; bottom: 12px; left: 14px;
+    font-family: var(--font-mono); font-size: 10px;
+    color: #fff; letter-spacing: 2px; text-transform: uppercase;
+    background: rgba(0,80,180,0.7); padding: 4px 10px; border-radius: 4px;
+  }
+
+  .team-content { display: flex; flex-direction: column; gap: 28px; }
+
+  .team-stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+
+  .team-stat-box {
+    background: #ffffff; border: 1px solid #bdd8f0;
+    padding: 20px 16px; text-align: center; border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,100,200,0.06);
+  }
+
+  .team-stat-num {
+    font-family: var(--font-display); font-size: 36px;
+    font-weight: 900; color: var(--accent); line-height: 1;
+  }
+
+  .team-stat-label {
+    font-family: var(--font-mono); font-size: 10px;
+    color: #4a7a9b; letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .team-desc {
+    font-size: 15px; color: #3a6080; line-height: 1.8; font-weight: 300;
+  }
+
+  .team-roles {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+
+  .role-pill {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--accent); background: #e0f0ff;
+    border: 1px solid #bdd8f0; padding: 6px 14px;
+    letter-spacing: 1px; text-transform: uppercase; border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .role-pill:hover { background: var(--accent); color: #fff; }
+
+  /* ===== IT SERVICES HIGHLIGHT STRIP ===== */
+  .services-highlight { background: #0d2a45; padding: 60px; }
+
+  .services-highlight-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; margin-top: 40px;
+  }
+
+  .highlight-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 32px 24px; border-radius: 12px;
+    text-align: center; transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+
+  .highlight-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #0077cc, #00aaff);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+
+  .highlight-card:hover::before { transform: scaleX(1); }
+
+  .highlight-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,100,200,0.3);
+  }
+
+  .highlight-icon {
+    font-size: 40px; display: block; margin-bottom: 16px;
+  }
+
+  .highlight-title {
+    font-family: var(--font-display); font-size: 18px;
+    font-weight: 700; text-transform: uppercase;
+    color: #e8f4ff; margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+
+  .highlight-desc {
+    font-size: 12px; color: #7aaccc;
+    line-height: 1.7; font-weight: 300;
+  }
+
+  .highlight-num {
+    font-family: var(--font-mono); font-size: 10px;
+    color: #00aaff; letter-spacing: 3px; margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .team-images { grid-template-rows: 200px 160px; }
+    .services-highlight-grid { grid-template-columns: 1fr 1fr; }
+    .team-stat-row { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #0d2a45;
+    border-top: 2px solid #1a4a7a;
+    padding: 60px 60px 30px;
+  }
+
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; padding-bottom: 40px;
+    border-bottom: 1px solid #1a4a7a;
+  }
+
+  .footer-brand p {
+    font-size: 13px; color: #7aaccc;
+    line-height: 1.8; font-weight: 300; margin-top: 16px;
+    max-width: 260px;
+  }
+
+  .footer-col-title {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--red);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-links a {
+    font-size: 13px; color: #7aaccc;
+    text-decoration: none; font-weight: 300;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--red); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px; flex-wrap: wrap; gap: 16px; border-top: 1px solid #1a4a7a;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 11px; color: #5a8aaa; letter-spacing: 1px;
+  }
+
+  .footer-socials { display: flex; gap: 12px; }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid #1a4a7a;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; text-decoration: none; color: #7aaccc;
+    transition: all 0.2s; border-radius: 4px;
+  }
+
+  .social-btn:hover { border-color: var(--red); background: var(--red-glow); }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    background: linear-gradient(135deg, #0055aa 0%, #0099ee 50%, #00bbff 100%);
+    padding: 70px 60px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 54px);
+    font-weight: 900; text-transform: uppercase;
+    line-height: 1.1; color: #fff;
+  }
+
+  .btn-white {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600;
+    color: #0055aa; background: #fff;
+    padding: 16px 40px; letter-spacing: 2px;
+    text-decoration: none; text-transform: uppercase;
+    white-space: nowrap; transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-white:hover { background: #f0f0f0; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ===== PRICING ===== */
+  .pricing { background: #e4f0fb; }
+
+  .pricing-toggle {
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 24px;
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .toggle-switch {
+    width: 52px; height: 26px;
+    background: var(--border); border-radius: 13px;
+    position: relative; cursor: pointer;
+    transition: background 0.3s;
+    border: 1px solid var(--border);
+  }
+
+  .toggle-switch.active { background: var(--red); }
+
+  .toggle-knob {
+    position: absolute; top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: #fff; border-radius: 50%;
+    transition: transform 0.3s;
+  }
+
+  .toggle-switch.active .toggle-knob { transform: translateX(26px); }
+
+  .toggle-save {
+    font-family: var(--font-mono);
+    font-size: 10px; color: #fff;
+    background: var(--red); padding: 2px 8px;
+    letter-spacing: 1px;
+  }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; background: transparent; margin-top: 50px;
+  }
+
+  .price-card {
+    background: #ffffff; padding: 44px 36px;
+    position: relative; transition: all 0.3s;
+    box-shadow: 0 2px 16px rgba(0,100,200,0.06);
+  }
+
+  .price-card:hover { background: #f0f7ff; box-shadow: 0 8px 28px rgba(0,100,200,0.14); }
+
+  .price-card.featured {
+    background: #0d2a45; border: 2px solid var(--accent);
+    margin: -8px; z-index: 1; padding: 52px 36px;
+    box-shadow: 0 12px 40px rgba(0,100,200,0.22);
+  }
+
+  .price-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: 10px;
+    background: linear-gradient(90deg, #0077cc, #00aaff); color: #fff;
+    padding: 5px 20px; letter-spacing: 2px; text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .price-plan {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--red); letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+
+  .price-name {
+    font-family: var(--font-display); font-size: 28px;
+    font-weight: 900; text-transform: uppercase;
+    margin-bottom: 20px; color: #0d2a45;
+  }
+
+  .price-amount {
+    display: flex; align-items: flex-start; gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .price-currency {
+    font-family: var(--font-display); font-size: 22px;
+    font-weight: 700; color: var(--red); margin-top: 8px;
+  }
+
+  .price-num {
+    font-family: var(--font-display); font-size: 64px;
+    font-weight: 900; line-height: 1; color: #0d2a45;
+  }
+
+  .price-period {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--muted); align-self: flex-end;
+    margin-bottom: 8px; letter-spacing: 1px;
+  }
+
+  .price-desc {
+    font-size: 13px; color: #4a7a9b;
+    font-weight: 300; margin-bottom: 28px;
+    line-height: 1.6; padding-bottom: 28px;
+    border-bottom: 1px solid #bdd8f0;
+  }
+
+  .price-features {
+    list-style: none; display: flex;
+    flex-direction: column; gap: 12px; margin-bottom: 36px;
+  }
+
+  .price-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 300; color: #2a5070;
+  }
+
+  .price-features li::before {
+    content: '✓'; color: var(--red);
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 700; flex-shrink: 0;
+  }
+
+  .price-features li.off { color: #aac8df; }
+  .price-features li.off::before { content: '✕'; color: #333; }
+
+  .price-btn {
+    display: block; text-align: center;
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 14px; text-decoration: none;
+    border: 1px solid var(--red); color: var(--red);
+    transition: all 0.25s;
+  }
+
+  .price-btn:hover, .price-btn.filled {
+    background: var(--accent); color: #fff;
+  }
+
+  /* ===== BLOG ===== */
+  .blog { background: #f0f7ff; }
+
+  .blog-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 50px; gap: 24px;
+  }
+
+  .blog-all {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--red); letter-spacing: 2px;
+    text-transform: uppercase; text-decoration: none;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 2px; transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .blog-all:hover { opacity: 0.7; }
+
+  .blog-grid {
+    display: grid; grid-template-columns: 2fr 1fr;
+    gap: 20px; background: transparent;
+  }
+
+  .blog-featured {
+    background: #ffffff; padding: 0;
+    position: relative; overflow: hidden;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 2px 16px rgba(0,100,200,0.06);
+  }
+
+  .blog-featured:hover { background: #f0f7ff; box-shadow: 0 8px 28px rgba(0,100,200,0.12); }
+
+  .blog-img {
+    width: 100%; height: 240px;
+    background: linear-gradient(135deg, #001020 0%, #002244 50%, #001830 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; position: relative; overflow: hidden;
+  }
+
+  .blog-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, var(--card) 100%);
+  }
+
+  .blog-img-sm {
+    width: 100%; height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; position: relative; overflow: hidden;
+  }
+
+  .blog-img-sm::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, var(--card) 100%);
+  }
+
+  .blog-body { padding: 28px 32px 36px; }
+  .blog-body-sm { padding: 16px 24px 24px; }
+
+  .blog-cat {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--red); letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .blog-cat::before { content: '▸'; opacity: 0.7; }
+
+  .blog-title {
+    font-family: var(--font-display); font-size: 26px;
+    font-weight: 700; text-transform: uppercase;
+    line-height: 1.2; margin-bottom: 12px;
+    transition: color 0.2s; color: #0d2a45;
+  }
+
+  .blog-featured:hover .blog-title { color: var(--red); }
+
+  .blog-title-sm {
+    font-family: var(--font-display); font-size: 16px;
+    font-weight: 700; text-transform: uppercase;
+    line-height: 1.3; margin-bottom: 8px;
+    transition: color 0.2s; color: #0d2a45;
+  }
+
+  .blog-side-card:hover .blog-title-sm { color: var(--red); }
+
+  .blog-excerpt {
+    font-size: 13px; color: #4a7a9b;
+    line-height: 1.7; font-weight: 300; margin-bottom: 20px;
+  }
+
+  .blog-meta {
+    display: flex; align-items: center; gap: 16px;
+    font-family: var(--font-mono); font-size: 10px;
+    color: #4a7a9b; letter-spacing: 1px;
+  }
+
+  .blog-meta-dot { color: var(--red); }
+
+  .blog-side {
+    display: flex; flex-direction: column; gap: 16px;
+    background: transparent;
+  }
+
+  .blog-side-card {
+    background: #ffffff; flex: 1;
+    cursor: pointer; transition: all 0.3s;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,100,200,0.06);
+  }
+
+  .blog-side-card:hover { background: #f0f7ff; }
+
+  .blog-img-sm.cloud { background: linear-gradient(135deg, #001830 0%, #002a50 100%); }
+  .blog-img-sm.cyber { background: linear-gradient(135deg, #001020 0%, #001a35 100%); }
+  .blog-img-sm.ai { background: linear-gradient(135deg, #1a0a00 0%, #2a1000 100%); }
+
+  .blog-img.featured-bg { background: linear-gradient(135deg, #001020 0%, #002244 50%, #001830 100%); }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    .hero { padding: 110px 24px 70px; }
+    .hero-stats { display: none; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-visual { height: 220px; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display: none; }
+    .test-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .cta-banner { padding: 50px 24px; }
+    .services-intro { flex-direction: column; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { margin: 0; padding: 44px 36px; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-fin"></div>
+    <span class="nav-brand">SHARK <span>IT</span> SOLUTIONS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Predator-Class Technology</div>
+    <h1 class="hero-h1">
+      <span class="red">SHARK</span><br/>
+      <span class="outline">IT</span><br/>
+      SOLUTIONS
+    </h1>
+    <p class="hero-sub">We deliver cloud engineering, cybersecurity, AI solutions, web development, database support and system administration — built for businesses that refuse to be prey.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-ghost">Talk to Us</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">99%</div>
+      <div class="stat-label">Uptime SLA</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    &nbsp;&nbsp;&nbsp; CLOUD ENGINEERING &nbsp;·&nbsp; AWS SOLUTIONS &nbsp;·&nbsp; CYBERSECURITY &nbsp;·&nbsp; AI SUPPORT &nbsp;·&nbsp; LINUX ADMINISTRATION &nbsp;·&nbsp; WEB DEVELOPMENT &nbsp;·&nbsp; SYSTEM ADMINISTRATION &nbsp;·&nbsp; DATABASE SUPPORT &nbsp;·&nbsp; MANAGED IT SERVICES &nbsp;·&nbsp; DEVOPS &nbsp;·&nbsp; NETWORK SECURITY &nbsp;·&nbsp;
+    &nbsp;&nbsp;&nbsp; CLOUD ENGINEERING &nbsp;·&nbsp; AWS SOLUTIONS &nbsp;·&nbsp; CYBERSECURITY &nbsp;·&nbsp; AI SUPPORT &nbsp;·&nbsp; LINUX ADMINISTRATION &nbsp;·&nbsp; WEB DEVELOPMENT &nbsp;·&nbsp; SYSTEM ADMINISTRATION &nbsp;·&nbsp; DATABASE SUPPORT &nbsp;·&nbsp; MANAGED IT SERVICES &nbsp;·&nbsp; DEVOPS &nbsp;·&nbsp; NETWORK SECURITY &nbsp;·&nbsp;
+  </div>
+</div>
+
+<!-- CLIENT LOGOS STRIP -->
+<div class="clients">
+  <div class="clients-label">Trusted by 50+ companies across India</div>
+  <div class="clients-track-wrap">
+    <div class="clients-track">
+      <!-- Set 1 -->
+      <div class="client-logo-box"><span class="client-logo-icon">🏦</span><div class="client-logo-name">NexaBank</div><div class="client-logo-industry">Finance</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏥</span><div class="client-logo-name">MedCore India</div><div class="client-logo-industry">Healthcare</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🛒</span><div class="client-logo-name">UrbanKart</div><div class="client-logo-industry">E-Commerce</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏗️</span><div class="client-logo-name">InfraEdge</div><div class="client-logo-industry">Construction</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">📱</span><div class="client-logo-name">SwiftApps</div><div class="client-logo-industry">SaaS</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">✈️</span><div class="client-logo-name">SkyRoute</div><div class="client-logo-industry">Travel & Logistics</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🎓</span><div class="client-logo-name">EduNest</div><div class="client-logo-industry">EdTech</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">⚡</span><div class="client-logo-name">VoltGrid</div><div class="client-logo-industry">Energy</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🍔</span><div class="client-logo-name">QuickBite</div><div class="client-logo-industry">Food Tech</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏠</span><div class="client-logo-name">PropNest</div><div class="client-logo-industry">Real Estate</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🔐</span><div class="client-logo-name">SecureVault</div><div class="client-logo-industry">Cybersecurity</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🚀</span><div class="client-logo-name">LaunchPad HQ</div><div class="client-logo-industry">Startup Studio</div></div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="client-logo-box"><span class="client-logo-icon">🏦</span><div class="client-logo-name">NexaBank</div><div class="client-logo-industry">Finance</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏥</span><div class="client-logo-name">MedCore India</div><div class="client-logo-industry">Healthcare</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🛒</span><div class="client-logo-name">UrbanKart</div><div class="client-logo-industry">E-Commerce</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏗️</span><div class="client-logo-name">InfraEdge</div><div class="client-logo-industry">Construction</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">📱</span><div class="client-logo-name">SwiftApps</div><div class="client-logo-industry">SaaS</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">✈️</span><div class="client-logo-name">SkyRoute</div><div class="client-logo-industry">Travel & Logistics</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🎓</span><div class="client-logo-name">EduNest</div><div class="client-logo-industry">EdTech</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">⚡</span><div class="client-logo-name">VoltGrid</div><div class="client-logo-industry">Energy</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🍔</span><div class="client-logo-name">QuickBite</div><div class="client-logo-industry">Food Tech</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🏠</span><div class="client-logo-name">PropNest</div><div class="client-logo-industry">Real Estate</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🔐</span><div class="client-logo-name">SecureVault</div><div class="client-logo-industry">Cybersecurity</div></div>
+      <div class="client-logo-box"><span class="client-logo-icon">🚀</span><div class="client-logo-name">LaunchPad HQ</div><div class="client-logo-industry">Startup Studio</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-intro">
+    <div>
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">OUR <span class="red">SERVICES</span></h2>
+    </div>
+    <p class="services-desc">From cloud infrastructure to AI integration — we cover every layer of your technology stack with precision and speed.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <span class="service-icon">☁️</span>
+      <div class="service-num">01</div>
+      <div class="service-name">Cloud Engineering</div>
+      <p class="service-desc">Architect, migrate and manage scalable cloud infrastructure. We design resilient systems on AWS, Azure and GCP tailored to your business needs.</p>
+      <div class="service-tags">
+        <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">Terraform</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🛡️</span>
+      <div class="service-num">02</div>
+      <div class="service-name">Cybersecurity</div>
+      <p class="service-desc">Protect your digital assets with enterprise-grade security. Penetration testing, threat monitoring, SOC services and compliance management.</p>
+      <div class="service-tags">
+        <span class="tag">Pen Testing</span><span class="tag">SOC</span><span class="tag">Firewall</span><span class="tag">SIEM</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🤖</span>
+      <div class="service-num">03</div>
+      <div class="service-name">AI Solutions & Support</div>
+      <p class="service-desc">Integrate AI into your business workflows. Chatbots, automation pipelines, ML model deployment and AI-powered analytics for smarter decisions.</p>
+      <div class="service-tags">
+        <span class="tag">ChatGPT</span><span class="tag">ML Ops</span><span class="tag">Automation</span><span class="tag">LLM</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">💻</span>
+      <div class="service-num">04</div>
+      <div class="service-name">Web Development</div>
+      <p class="service-desc">Full-stack web solutions from landing pages to enterprise portals. We build fast, secure and scalable web applications for every industry.</p>
+      <div class="service-tags">
+        <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">WordPress</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🖥️</span>
+      <div class="service-num">05</div>
+      <div class="service-name">System Administration</div>
+      <p class="service-desc">End-to-end system management including server setup, monitoring, patch management and 24/7 support to keep your infrastructure running.</p>
+      <div class="service-tags">
+        <span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">VMware</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🐧</span>
+      <div class="service-num">06</div>
+      <div class="service-name">Linux Administration</div>
+      <p class="service-desc">Expert Linux server management, shell scripting, performance tuning, and open-source stack management across Ubuntu, CentOS and RHEL.</p>
+      <div class="service-tags">
+        <span class="tag">Ubuntu</span><span class="tag">RHEL</span><span class="tag">Bash</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🗄️</span>
+      <div class="service-num">07</div>
+      <div class="service-name">Database Support</div>
+      <p class="service-desc">End-to-end database management, optimization, and support. We design, deploy, migrate and maintain high-performance databases for businesses of all sizes — ensuring zero data loss and maximum availability.</p>
+      <div class="service-tags">
+        <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">MSSQL</span><span class="tag">Oracle</span><span class="tag">Redis</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-tag">Why Choose Us</div>
+  <h2 class="section-title">BUILT TO <span class="red">DOMINATE</span></h2>
+  <div class="why-grid">
+    <div class="why-visual">
+      <div class="why-box why-box-main">
+        <div class="why-shark-title">The Shark Advantage</div>
+        <p class="why-shark-text">We don't just fix problems — we hunt them down before they surface. Our team brings enterprise-grade expertise to every engagement, delivering solutions that are swift, sharp, and built to last.</p>
+      </div>
+      <div class="why-box why-box-accent">
+        <div class="big-num">24/7</div>
+        <div class="big-label">Support Available</div>
+      </div>
+    </div>
+    <ul class="why-points">
+      <li class="why-point">
+        <div class="why-point-icon">⚡</div>
+        <div>
+          <div class="why-point-title">Swift Response Time</div>
+          <p class="why-point-desc">Critical issues resolved within 1 hour. We move fast so your business doesn't stop.</p>
+        </div>
+      </li>
+      <li class="why-point">
+        <div class="why-point-icon">🎯</div>
+        <div>
+          <div class="why-point-title">Certified Experts</div>
+          <p class="why-point-desc">AWS certified engineers, ethical hackers and full-stack developers under one roof.</p>
+        </div>
+      </li>
+      <li class="why-point">
+        <div class="why-point-icon">🔒</div>
+        <div>
+          <div class="why-point-title">Security First Approach</div>
+          <p class="why-point-desc">Every solution is built with security baked in from day one — not bolted on later.</p>
+        </div>
+      </li>
+      <li class="why-point">
+        <div class="why-point-icon">📈</div>
+        <div>
+          <div class="why-point-title">Scalable Solutions</div>
+          <p class="why-point-desc">Infrastructure that grows with you — from startup to enterprise without re-architecting.</p>
+        </div>
+      </li>
+      <li class="why-point">
+        <div class="why-point-icon">💰</div>
+        <div>
+          <div class="why-point-title">Cost Optimized</div>
+          <p class="why-point-desc">We maximize your ROI by eliminating waste and right-sizing your technology investments.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-tag">How We Work</div>
+  <h2 class="section-title">OUR <span class="red">PROCESS</span></h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-circle">01</div>
+      <div class="step-title">Discovery</div>
+      <p class="step-desc">We deep-dive into your infrastructure, identify gaps and understand your business goals before recommending anything.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">02</div>
+      <div class="step-title">Strategy</div>
+      <p class="step-desc">Our architects design a tailored technology roadmap aligned to your budget, timeline and growth targets.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">03</div>
+      <div class="step-title">Execution</div>
+      <p class="step-desc">We implement with precision — no downtime surprises. Agile delivery with regular updates and transparent communication.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">04</div>
+      <div class="step-title">Support</div>
+      <p class="step-desc">Post-delivery 24/7 monitoring and support. We stay with you as a long-term technology partner, not just a vendor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="tech" id="tech">
+  <div class="section-tag">Technologies</div>
+  <h2 class="section-title">OUR <span class="red">TECH STACK</span></h2>
+  <div class="tech-grid">
+    <div class="tech-item"><span class="tech-logo">☁️</span><div class="tech-name">AWS</div></div>
+    <div class="tech-item"><span class="tech-logo">🔵</span><div class="tech-name">Azure</div></div>
+    <div class="tech-item"><span class="tech-logo">🐳</span><div class="tech-name">Docker</div></div>
+    <div class="tech-item"><span class="tech-logo">⎈</span><div class="tech-name">Kubernetes</div></div>
+    <div class="tech-item"><span class="tech-logo">🐧</span><div class="tech-name">Linux</div></div>
+    <div class="tech-item"><span class="tech-logo">🏗️</span><div class="tech-name">Terraform</div></div>
+    <div class="tech-item"><span class="tech-logo">⚛️</span><div class="tech-name">React</div></div>
+    <div class="tech-item"><span class="tech-logo">🐍</span><div class="tech-name">Python</div></div>
+    <div class="tech-item"><span class="tech-logo">🟢</span><div class="tech-name">Node.js</div></div>
+    <div class="tech-item"><span class="tech-logo">🔐</span><div class="tech-name">CrowdStrike</div></div>
+    <div class="tech-item"><span class="tech-logo">📊</span><div class="tech-name">Grafana</div></div>
+    <div class="tech-item"><span class="tech-logo">🤖</span><div class="tech-name">OpenAI</div></div>
+    <div class="tech-item"><span class="tech-logo">🗄️</span><div class="tech-name">MySQL</div></div>
+    <div class="tech-item"><span class="tech-logo">🐘</span><div class="tech-name">PostgreSQL</div></div>
+    <div class="tech-item"><span class="tech-logo">🍃</span><div class="tech-name">MongoDB</div></div>
+    <div class="tech-item"><span class="tech-logo">⚡</span><div class="tech-name">Redis</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="testimonials">
+  <div class="section-tag">Customer Reviews</div>
+  <h2 class="section-title">WHAT OUR CLIENTS <span class="red">SAY</span></h2>
+
+  <!-- Summary Bar -->
+  <div class="reviews-summary">
+    <div class="reviews-score">
+      <div class="reviews-big-num">4.9</div>
+      <div class="reviews-stars-row">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="reviews-total">Based on 127 reviews</div>
+    </div>
+
+    <div class="reviews-bars">
+      <div class="bar-row"><span class="bar-label">5 ★</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="bar-count">112</span></div>
+      <div class="bar-row"><span class="bar-label">4 ★</span><div class="bar-track"><div class="bar-fill" style="width:10%"></div></div><span class="bar-count">13</span></div>
+      <div class="bar-row"><span class="bar-label">3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-count">2</span></div>
+      <div class="bar-row"><span class="bar-label">2 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
+      <div class="bar-row"><span class="bar-label">1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="bar-count">0</span></div>
+    </div>
+
+    <div class="reviews-platforms">
+      <div class="platform-badge"><span class="platform-icon">in</span><span class="platform-name">LinkedIn</span><span class="platform-score">4.9</span></div>
+      <div class="platform-badge"><span class="platform-icon">🌐</span><span class="platform-name">Google</span><span class="platform-score">4.8</span></div>
+      <div class="platform-badge"><span class="platform-icon">🖥️</span><span class="platform-name">Clutch</span><span class="platform-score">5.0</span></div>
+    </div>
+  </div>
+
+  <!-- Review Cards -->
+  <div class="reviews-grid">
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-red">RK</div>
+          <div>
+            <div class="review-name">Rajesh Kumar</div>
+            <div class="review-role">CTO · NexaBank</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">Cloud Engineering</span>
+      <p class="review-text">"Shark IT completely overhauled our AWS infrastructure. Our cloud costs dropped 40% and system performance improved overnight. Exceptional team — they over-delivered on every promise."</p>
+      <div class="review-company"><span>NexaBank · Finance Sector</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-blue">PS</div>
+          <div>
+            <div class="review-name">Priya Sharma</div>
+            <div class="review-role">CEO · SecureVault</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">Cybersecurity</span>
+      <p class="review-text">"Their cybersecurity audit uncovered 12 critical vulnerabilities we had no idea about. The team responded immediately and patched everything within 48 hours. Truly 24/7 support."</p>
+      <div class="review-company"><span>SecureVault · Cybersecurity</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-green">AM</div>
+          <div>
+            <div class="review-name">Arun Mehta</div>
+            <div class="review-role">Founder · UrbanKart</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">AI Solutions</span>
+      <p class="review-text">"The AI chatbot Shark IT built handles 80% of our customer queries automatically. The ROI was immediate — we saved ₹4L/month in support costs within the first 3 months. Brilliant work."</p>
+      <div class="review-company"><span>UrbanKart · E-Commerce</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-purple">DV</div>
+          <div>
+            <div class="review-name">Dr. Deepa Varma</div>
+            <div class="review-role">IT Head · MedCore India</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">System Administration</span>
+      <p class="review-text">"Managing 200+ hospital workstations used to be a nightmare. Shark IT set up a fully automated patch management and monitoring system. Zero downtime in 8 months. Absolutely brilliant."</p>
+      <div class="review-company"><span>MedCore India · Healthcare</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-amber">SK</div>
+          <div>
+            <div class="review-name">Suresh Krishnan</div>
+            <div class="review-role">Director · EduNest</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">Web Development</span>
+      <p class="review-text">"Our e-learning platform went from a slow WordPress site to a blazing-fast React application. Student engagement went up 65%. Shark IT delivered it 2 weeks ahead of schedule. Exceptional."</p>
+      <div class="review-company"><span>EduNest · EdTech</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-teal">NR</div>
+          <div>
+            <div class="review-name">Nisha Reddy</div>
+            <div class="review-role">CTO · SwiftApps</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">Linux Administration</span>
+      <p class="review-text">"We migrated 15 production Linux servers to a new data center with zero data loss and only 22 minutes of total downtime. The Shark IT team were professional, meticulous, and incredibly calm under pressure."</p>
+      <div class="review-company"><span>SwiftApps · SaaS Platform</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-author-row">
+          <div class="review-avatar av-blue">VK</div>
+          <div>
+            <div class="review-name">Vijay Kapoor</div>
+            <div class="review-role">Lead DBA · InfraEdge</div>
+          </div>
+        </div>
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+      <span class="review-service-tag">Database Support</span>
+      <p class="review-text">"Shark IT migrated our entire Oracle database to PostgreSQL with zero downtime and zero data loss. Query performance improved by 3x. Their DBA team is world-class — thorough, fast and completely reliable."</p>
+      <div class="review-company"><span>InfraEdge · Construction Tech</span><span class="review-verified">✓ Verified Client</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-tag">Transparent Pricing</div>
+  <h2 class="section-title">SIMPLE <span class="red">PLANS</span></h2>
+  <div class="pricing-toggle">
+    <span>Monthly</span>
+    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
+      <div class="toggle-knob"></div>
+    </div>
+    <span>Annual</span>
+    <span class="toggle-save">SAVE 20%</span>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="price-card">
+      <div class="price-plan">Starter</div>
+      <div class="price-name">Bite Plan</div>
+      <div class="price-amount">
+        <span class="price-currency">₹</span>
+        <span class="price-num" id="p1">9,999</span>
+        <span class="price-period">/mo</span>
+      </div>
+      <p class="price-desc">Perfect for startups and small businesses stepping into managed IT for the first time.</p>
+      <ul class="price-features">
+        <li>Cloud Setup & Configuration</li>
+        <li>Basic Linux/Windows Server Admin</li>
+        <li>5 Hours Monthly Support</li>
+        <li>Email & Ticketing Support</li>
+        <li>Monthly Health Report</li>
+        <li>SSL & Domain Management</li>
+        <li class="off">Cybersecurity Audit</li>
+        <li class="off">AI Integration</li>
+        <li class="off">Dedicated Account Manager</li>
+      </ul>
+      <a href="#contact" class="price-btn">Get Started →</a>
+    </div>
+
+    <!-- FEATURED -->
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-plan">Professional</div>
+      <div class="price-name">Hunter Plan</div>
+      <div class="price-amount">
+        <span class="price-currency">₹</span>
+        <span class="price-num" id="p2">24,999</span>
+        <span class="price-period">/mo</span>
+      </div>
+      <p class="price-desc">Full-stack IT management for growing businesses that need reliability, security and speed.</p>
+      <ul class="price-features">
+        <li>Everything in Bite Plan</li>
+        <li>AWS / Azure Cloud Management</li>
+        <li>20 Hours Monthly Support</li>
+        <li>24/7 Priority Support</li>
+        <li>Quarterly Cybersecurity Audit</li>
+        <li>Basic AI Chatbot Integration</li>
+        <li>Web App Development (2 pages/mo)</li>
+        <li>Dedicated Account Manager</li>
+        <li class="off">Custom AI Solutions</li>
+      </ul>
+      <a href="#contact" class="price-btn filled">Get Started →</a>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="price-card">
+      <div class="price-plan">Enterprise</div>
+      <div class="price-name">Apex Plan</div>
+      <div class="price-amount">
+        <span class="price-currency">₹</span>
+        <span class="price-num" id="p3">59,999</span>
+        <span class="price-period">/mo</span>
+      </div>
+      <p class="price-desc">Unlimited technology firepower for enterprises that demand the highest level of IT excellence.</p>
+      <ul class="price-features">
+        <li>Everything in Hunter Plan</li>
+        <li>Unlimited Support Hours</li>
+        <li>Full SOC & Threat Monitoring</li>
+        <li>Custom AI & Automation Solutions</li>
+        <li>Full Web & App Development</li>
+        <li>Monthly Pen Testing</li>
+        <li>DevOps & CI/CD Pipeline</li>
+        <li>SLA Guarantee — 99.9% Uptime</li>
+        <li>On-site Support (Hyderabad)</li>
+      </ul>
+      <a href="#contact" class="price-btn">Talk to Sales →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="blog-header">
+    <div>
+      <div class="section-tag">Knowledge Base</div>
+      <h2 class="section-title">LATEST <span class="red">INSIGHTS</span></h2>
+    </div>
+    <a href="#blog" class="blog-all">View All Posts →</a>
+  </div>
+
+  <div class="blog-grid">
+
+    <!-- FEATURED POST -->
+    <div class="blog-featured">
+      <div class="blog-img featured-bg">🛡️</div>
+      <div class="blog-body">
+        <div class="blog-cat">Cybersecurity</div>
+        <div class="blog-title">Top 10 Cybersecurity Threats Businesses Face in 2025 — And How to Stop Them</div>
+        <p class="blog-excerpt">From ransomware-as-a-service to AI-powered phishing attacks, the threat landscape has never been more sophisticated. Here's what every IT decision-maker needs to know to protect their business this year.</p>
+        <div class="blog-meta">
+          <span>Shark IT Team</span>
+          <span class="blog-meta-dot">·</span>
+          <span>March 28, 2025</span>
+          <span class="blog-meta-dot">·</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDE POSTS -->
+    <div class="blog-side">
+
+      <div class="blog-side-card">
+        <div class="blog-img-sm cloud">☁️</div>
+        <div class="blog-body-sm">
+          <div class="blog-cat">Cloud Engineering</div>
+          <div class="blog-title-sm">AWS vs Azure: Which Cloud Is Right for Your Business in 2025?</div>
+          <div class="blog-meta" style="margin-top:10px;">
+            <span>Apr 2, 2025</span>
+            <span class="blog-meta-dot">·</span>
+            <span>5 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-side-card">
+        <div class="blog-img-sm ai">🤖</div>
+        <div class="blog-body-sm">
+          <div class="blog-cat">AI Solutions</div>
+          <div class="blog-title-sm">How AI Automation Is Saving Indian SMBs 30+ Hours Per Week</div>
+          <div class="blog-meta" style="margin-top:10px;">
+            <span>Mar 15, 2025</span>
+            <span class="blog-meta-dot">·</span>
+            <span>6 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-side-card">
+        <div class="blog-img-sm cyber">🐧</div>
+        <div class="blog-body-sm">
+          <div class="blog-cat">Linux Admin</div>
+          <div class="blog-title-sm">Linux Server Hardening: 15 Essential Steps Every Admin Must Follow</div>
+          <div class="blog-meta" style="margin-top:10px;">
+            <span>Mar 5, 2025</span>
+            <span class="blog-meta-dot">·</span>
+            <span>7 min read</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IT SERVICES HIGHLIGHT -->
+<section class="services-highlight">
+  <div class="section-tag" style="color:#00aaff;">Our Expertise</div>
+  <h2 class="section-title" style="color:#ffffff;">HIGHLIGHTED <span style="color:#00aaff;">IT SERVICES</span></h2>
+  <div class="services-highlight-grid">
+
+    <div class="highlight-card">
+      <div class="highlight-num">01 · CLOUD</div>
+      <span class="highlight-icon">☁️</span>
+      <div class="highlight-title">Cloud & AWS</div>
+      <p class="highlight-desc">Design, migrate and manage cloud infrastructure on AWS, Azure & GCP. Scalable, secure and cost-optimized.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">02 · SECURITY</div>
+      <span class="highlight-icon">🛡️</span>
+      <div class="highlight-title">Cybersecurity</div>
+      <p class="highlight-desc">Penetration testing, SOC monitoring, threat detection and full compliance management for your business.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">03 · AI</div>
+      <span class="highlight-icon">🤖</span>
+      <div class="highlight-title">AI Solutions</div>
+      <p class="highlight-desc">AI chatbots, ML pipelines, automation workflows and intelligent analytics to supercharge your operations.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">04 · DATABASE</div>
+      <span class="highlight-icon">🗄️</span>
+      <div class="highlight-title">Database Support</div>
+      <p class="highlight-desc">MySQL, PostgreSQL, MongoDB, Oracle — design, migration, optimization and 24/7 DBA support.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">05 · DEV</div>
+      <span class="highlight-icon">💻</span>
+      <div class="highlight-title">Web Development</div>
+      <p class="highlight-desc">Full-stack React, Node.js and Python applications. Fast, secure and built to scale for any business.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">06 · LINUX</div>
+      <span class="highlight-icon">🐧</span>
+      <div class="highlight-title">Linux Admin</div>
+      <p class="highlight-desc">Ubuntu, RHEL, CentOS server management, shell scripting, performance tuning and OS hardening.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">07 · INFRA</div>
+      <span class="highlight-icon">🖥️</span>
+      <div class="highlight-title">System Admin</div>
+      <p class="highlight-desc">Windows Server, Active Directory, VMware and full infrastructure lifecycle management and support.</p>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-num">08 · MANAGED</div>
+      <span class="highlight-icon">⚙️</span>
+      <div class="highlight-title">Managed IT</div>
+      <p class="highlight-desc">Complete outsourced IT management — your dedicated tech department without the overhead cost.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEAM & WORKING STRUCTURE -->
+<section class="team-section" id="team">
+  <div class="section-tag">Our People</div>
+  <h2 class="section-title">MEET THE <span class="red">TEAM</span></h2>
+  <div class="team-grid">
+
+    <!-- Image Grid -->
+    <div class="team-images">
+      <div class="team-img span-col">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="IT Team collaboration"/>
+        <div class="team-img-overlay"></div>
+        <span class="team-img-label">Team Collaboration</span>
+      </div>
+      <div class="team-img">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" alt="Server room management"/>
+        <div class="team-img-overlay"></div>
+        <span class="team-img-label">Infrastructure</span>
+      </div>
+      <div class="team-img">
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80" alt="Developers working"/>
+        <div class="team-img-overlay"></div>
+        <span class="team-img-label">Development</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="team-content">
+      <div class="team-stat-row">
+        <div class="team-stat-box">
+          <div class="team-stat-num">15+</div>
+          <div class="team-stat-label">Engineers</div>
+        </div>
+        <div class="team-stat-box">
+          <div class="team-stat-num">8+</div>
+          <div class="team-stat-label">Certifications</div>
+        </div>
+        <div class="team-stat-box">
+          <div class="team-stat-num">5+</div>
+          <div class="team-stat-label">Years Avg Exp</div>
+        </div>
+      </div>
+
+      <p class="team-desc">Our team of certified engineers, ethical hackers, database administrators and full-stack developers work together in a structured, agile environment — delivering solutions that are sharp, secure and built to perform under pressure.</p>
+
+      <div class="team-roles">
+        <span class="role-pill">☁️ Cloud Architects</span>
+        <span class="role-pill">🛡️ Security Analysts</span>
+        <span class="role-pill">🤖 AI Engineers</span>
+        <span class="role-pill">🗄️ DBA Experts</span>
+        <span class="role-pill">💻 Full-Stack Devs</span>
+        <span class="role-pill">🐧 Linux Admins</span>
+        <span class="role-pill">🖥️ System Engineers</span>
+        <span class="role-pill">📊 Data Analysts</span>
+      </div>
+
+      <div style="margin-top:8px;">
+        <a href="#contact" class="btn-primary" style="display:inline-block; text-decoration:none;">Work With Us →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Working Structure -->
+  <div style="margin-top:70px;">
+    <div class="section-tag">How We're Structured</div>
+    <h3 style="font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;color:#0d2a45;margin-bottom:36px;">WORKING <span style="color:var(--accent)">STRUCTURE</span></h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+
+      <div style="background:#fff;border:1px solid #bdd8f0;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(0,100,200,0.06);border-top:3px solid #0077cc;">
+        <div style="font-size:28px;margin-bottom:12px;">🏗️</div>
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;text-transform:uppercase;color:#0d2a45;margin-bottom:8px;">Agile Pods</div>
+        <p style="font-size:13px;color:#4a7a9b;line-height:1.7;font-weight:300;">3–5 member specialist pods assigned per client project for focused, accountable delivery.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid #bdd8f0;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(0,100,200,0.06);border-top:3px solid #0099cc;">
+        <div style="font-size:28px;margin-bottom:12px;">📋</div>
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;text-transform:uppercase;color:#0d2a45;margin-bottom:8px;">Weekly Sprints</div>
+        <p style="font-size:13px;color:#4a7a9b;line-height:1.7;font-weight:300;">Weekly sprint reviews and progress reports keep clients informed at every step.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid #bdd8f0;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(0,100,200,0.06);border-top:3px solid #00aacc;">
+        <div style="font-size:28px;margin-bottom:12px;">🔔</div>
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;text-transform:uppercase;color:#0d2a45;margin-bottom:8px;">24/7 NOC</div>
+        <p style="font-size:13px;color:#4a7a9b;line-height:1.7;font-weight:300;">Network Operations Center monitors all client environments around the clock, every day.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid #bdd8f0;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(0,100,200,0.06);border-top:3px solid #00bbdd;">
+        <div style="font-size:28px;margin-bottom:12px;">📈</div>
+        <div style="font-family:var(--font-display);font-size:18px;font-weight:700;text-transform:uppercase;color:#0d2a45;margin-bottom:8px;">SLA Reporting</div>
+        <p style="font-size:13px;color:#4a7a9b;line-height:1.7;font-weight:300;">Monthly SLA performance reports with uptime metrics, incident logs and improvement plans.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>READY TO WORK<br/>WITH THE SHARKS?</h2>
+  <a href="#contact" class="btn-white">Start Your Project →</a>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag">Get In Touch</div>
+  <h2 class="section-title">CONTACT <span class="red">US</span></h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6afa8a0a986b5aea7b4adafb2b5a9aab3b2afa9a8b5e8a5a9ab">[email&#160;protected]</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-val">+91 98765 43210</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-val">Hyderabad, Telangana, India</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-val"><a href="https://www.linkedin.com/in/shark-itsolutions-4b52a3256" target="_blank" style="color:var(--red);text-decoration:none;">linkedin.com/in/shark-itsolutions</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Support Hours</div>
+          <div class="contact-val">24/7 — 365 Days a Year</div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" placeholder="John Smith"/>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@company.com"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 98765 43210"/>
+        </div>
+        <div class="form-field">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Cloud Engineering</option>
+            <option>Cybersecurity</option>
+            <option>AI Solutions & Support</option>
+            <option>Web Development</option>
+            <option>System Administration</option>
+            <option>Linux Administration</option>
+            <option>Database Support</option>
+            <option>Managed IT Services</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Tell us about your project or challenge..."></textarea>
+      </div>
+      <button class="form-submit" type="submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="nav-brand" style="font-size:20px;">SHARK <span style="color:var(--red)">IT</span> SOLUTIONS</span>
+      <p>Predator-class technology services for businesses that demand excellence. Cloud · Security · AI · Development · Infrastructure.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Cloud Engineering</a></li>
+        <li><a href="#services">Cybersecurity</a></li>
+        <li><a href="#services">AI Solutions</a></li>
+        <li><a href="#services">Web Development</a></li>
+        <li><a href="#services">System Admin</a></li>
+        <li><a href="#services">Linux Admin</a></li>
+        <li><a href="#services">Database Support</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#process">How We Work</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#"><span class="__cf_email__" data-cfemail="127b7c747d52617a7360797b66617d7e67667b7d7c613c717d7f">[email&#160;protected]</span></a></li>
+        <li><a href="#">+91 98765 43210</a></li>
+        <li><a href="#">Hyderabad, India</a></li>
+        <li><a href="https://www.linkedin.com/in/shark-itsolutions-4b52a3256" target="_blank">LinkedIn</a></li>
+        <li><a href="#">Twitter / X</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 SHARK IT SOLUTIONS · ALL RIGHTS RESERVED · BUILT WITH 🦈</div>
+    <div class="footer-socials">
+      <a class="social-btn" href="https://www.linkedin.com/in/shark-itsolutions-4b52a3256" target="_blank">in</a>
+      <a class="social-btn" href="#">𝕏</a>
+      <a class="social-btn" href="#">gh</a>
+      <a class="social-btn" href="#">yt</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>  Billing toggle
+  const monthly = { p1: '9,999', p2: '24,999', p3: '59,999' };
+  const annual  = { p1: '7,999', p2: '19,999', p3: '47,999' };
+  let isAnnual = false;
+
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('billingToggle');
+    toggle.classList.toggle('active', isAnnual);
+    const prices = isAnnual ? annual : monthly;
+    document.getElementById('p1').textContent = prices.p1;
+    document.getElementById('p2').textContent = prices.p2;
+    document.getElementById('p3').textContent = prices.p3;
+  }
+
+  /* Smooth active nav highlighting */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--red)' : '';
+    });
+  });
+
+  /* Form submit */
